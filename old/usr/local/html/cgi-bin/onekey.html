@@ -1,0 +1,419 @@
+﻿<form id="wmform">
+	<table class="tablesorter" style="width: 750px; margin-left: 150px;" >
+		<thead>
+			<tr style="text-align: left; padding: 2px; height: 35px;">
+				<th style="width: 50%" class="remove sorter-false">
+					<h5>$leftmenu.onekey$<font color="#FF0000">&nbsp;&nbsp;$onekey.notice$</font></h5>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr style="text-align: left;">
+			<td>
+				<p>
+				$partition.info$
+				<input readOnly name="disk" type="text" class="show_label" />
+				</p>
+
+			<p>
+				$sysinfo.type$
+				<select name="devtype" id="devtype" style="width: 120;">
+					<option value="0">R11</option>
+					<option value="1">CL5000T1(SDI)</option>
+					<option value="2">CL5000T2(IPC)</option>
+				</select>
+			</p>
+			<p>
+			$sysinfo.seriesno$
+			<input name="serialNumber" id="serialNumber" type="text"  class="inputtext validate[required]" />
+			</p>
+			<p>
+			$sysinfo.model$
+			<input name="modelNumber" id="modelNumber" type="text"  class="inputtext validate[required]" />
+			</p>
+	
+			<p>
+			$sysinfo.softname$
+				<select name="softlang" id="softlang" style="width:50;">
+					<option value="1">$sysinfo.cn$</option>
+					<option value="2">$sysinfo.us$</option>
+				</select>
+				<input name="softname11" id="softname11" type="text"  class="inputtext validate[required]" style="width: 300;" />
+				<input name="softname12" id="softname12" type="text"  class="inputtext validate[required]" style="width: 300;" />
+				<input name="softname21" id="softname21" type="text"  class="inputtext validate[required]" style="width: 300;" />
+				<input name="softname22" id="softname22" type="text"  class="inputtext validate[required]" style="width: 300;" />
+			</p>
+			<p>
+			$sysinfo.softtype$
+			<input name="softtype1" id="softtype1" type="text"  class="inputtext validate[required]" />
+			<input name="softtype2" id="softtype2" type="text"  class="inputtext validate[required]" />
+			</p>
+	
+		  <p>
+		  $sysinfo.microlecture$
+			<input name="microlecture" id="microlecture" type="text"  class="inputtext validate[required]" style="width: 340;"/>
+			</p>
+	
+		  <p>
+		  $sysinfo.copyright$
+			<select name="copyright" id="copyright" style="width: 50">
+				<option value="0">$sysinfo.null$</option>
+				<option value="1">$sysinfo.cn$</option>
+				<option value="2">$sysinfo.us$</option>
+			</select>
+			<input name="copyrightText0" id="copyrightText0" type="text"  class="inputtext" readonly  disabled style="width:300;" />
+			<input name="copyrightText1" id="copyrightText1" type="text"  class="inputtext validate[required]" style="width:300;"/>
+			<input name="copyrightText2" id="copyrightText2" type="text"  class="inputtext validate[required]" style="width:300;" />
+			</p>
+			</td>
+		</tr>
+		</tbody>
+	 </table>
+</form>
+
+<form enctype="multipart/form-data" id="wmform1" action="encoder.cgi" method="post" target="upload">
+	<table class="tablesorter" style="width: 750px; margin-left: 150px;" >
+		<tr  style="text-align: left;">
+			<td>
+			$sysupgrade.file$
+			<input type="file" name="file"/>
+			</td>
+			<input type="hidden" name="actioncode" value="110"/>
+		</tr>
+	 </table>
+</form>
+
+<form enctype="multipart/form-data" id="wmform2" action="encoder.cgi" method="post" target="upload">
+	<table class="tablesorter" style="width: 750px; margin-left: 150px;">
+		<tr  style="text-align: left;">
+			<td>
+			$sysupgrade.tools$
+			<input type="file" name="file"/>
+			</td>
+			<input type="hidden" name="actioncode" value="110"/>
+		</tr>
+		<tr style="text-align: left;">
+			<td style="text-align: left; ">
+				<p>
+				<input id="btnSet" type="button" class="$image_prex$click_btn" value="$sysinfo.set$" />
+				<input id="restartBtn" type="button" class="$image_prex$click_btn" value="$sysinfo.reboot$" />
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div id="settingInfo">
+					<ol>
+					</ol>
+				</div>
+			</td>
+		</tr>
+	 </table>
+</form>
+
+<iframe name="upload" style="display:none"></iframe>
+<script>
+//升级状态获取定时器
+var intervalId;
+
+//格式化状态获取定时器
+var formatIntervalId;
+
+function SysReboot(titleValue) {
+	art.dialog({
+		title: titleValue,
+		okValue: '$opt.rebootok$',
+		cancelValue: '$opt.rebootcancel$',
+		lock: true,
+		fixed: true,
+		background: '#600', // 背景色
+		opacity: 0.87,	// 透明度
+		content: titleValue,
+		ok: function() {
+			var data = {"actioncode": "215"};
+			jQueryAjaxCmd({
+				"data": data,
+				success: function(ret) { 
+					if(ret == "1"){
+						//falert('$falert.ok$', '$resetdefault.rebootsuccess$');
+						window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+					} else{
+						falert('$falert.ok$', '$uploadstateerror1$');
+					}
+				}
+			});	
+		},
+		cancel: true
+	});
+}
+
+
+function setSoftInfo() {
+	jQuery("#devtype").change(function() {
+		var val = jQuery(this).val();
+		if(val == 1) {
+			jQuery("#softlang").change(function() {
+				var softlang = jQuery(this).val();
+				if(softlang == 1) {
+					jQuery("#softname11").hide();
+					jQuery("#softname21").show();
+					jQuery("#softname12").hide();
+					jQuery("#softname22").hide();
+				} else {
+					jQuery("#softname11").hide();
+					jQuery("#softname21").hide();
+					jQuery("#softname12").hide();
+					jQuery("#softname22").show();				
+				}
+			}).change();
+
+			jQuery("#softtype1").hide();
+			jQuery("#softtype2").show();
+		} else if (val == 2) {
+			jQuery("#softlang").change(function() {
+				var softlang = jQuery(this).val();
+				if(softlang == 1) {
+					jQuery("#softname11").hide();
+					jQuery("#softname21").show();
+					jQuery("#softname12").hide();
+					jQuery("#softname22").hide();
+				} else {
+					jQuery("#softname11").hide();
+					jQuery("#softname21").hide();
+					jQuery("#softname12").hide();
+					jQuery("#softname22").show();				
+				}
+			}).change();
+
+			jQuery("#softtype1").hide();
+			jQuery("#softtype2").show();
+		} else {
+			jQuery("#softlang").change(function() {
+				var softlang = jQuery(this).val();
+				if(softlang == 1) {
+					jQuery("#softname11").show();
+					jQuery("#softname21").hide();
+					jQuery("#softname12").hide();
+					jQuery("#softname22").hide();
+				} else {
+					jQuery("#softname11").hide();
+					jQuery("#softname21").hide();
+					jQuery("#softname12").show();
+					jQuery("#softname22").hide();				
+				}
+			}).change();
+
+			jQuery("#softtype1").show();
+			jQuery("#softtype2").hide();
+		}
+	}).change();
+}
+
+
+function setCopyright() {
+	jQuery("#copyright").change(function() {
+		var val = jQuery(this).val();
+		if(val == 1) {
+			jQuery("#copyrightText0").hide();
+			jQuery("#copyrightText1").show();
+			jQuery("#copyrightText2").hide();
+		} else if (val == 2) {
+			jQuery("#copyrightText0").hide();
+			jQuery("#copyrightText1").hide();
+			jQuery("#copyrightText2").show();
+		} else {
+			jQuery("#copyrightText0").show();
+			jQuery("#copyrightText1").hide();
+			jQuery("#copyrightText2").hide();
+		}
+	}).change();
+}
+
+function oneSetSerialNo() {
+	var serialNumber = jQuery("#serialNumber").val();
+	var modelNumber = jQuery("#modelNumber").val();
+	var devtype = jQuery("#devtype").val();
+	var softname11 = jQuery("#softname11").val();
+	var softname12 = jQuery("#softname12").val();
+	var softname21 = jQuery("#softname21").val();
+	var softname22 = jQuery("#softname22").val();		
+	var softtype1 = jQuery("#softtype1").val();
+	var softtype2 = jQuery("#softtype2").val();
+	var microlecture = jQuery("#microlecture").val();
+	var settingData = {
+		"actioncode": "423",
+		"devtype": devtype,
+		"serialNumber": serialNumber, 
+		"modelNumber": modelNumber,
+		"softname11": softname11,
+		"softname12": softname12,
+		"softname21": softname21,
+		"softname22": softname22,				
+		"softtype1": softtype1,
+		"softtype2": softtype2,
+		"microlecture": microlecture,
+		"copyright": jQuery("#copyright").val(),
+		"copyrightText0": jQuery("#copyrightText0").val(),
+		"copyrightText1": jQuery("#copyrightText1").val(),
+		"copyrightText2": jQuery("#copyrightText2").val()
+	};
+	jQueryAjaxCmd({
+		"data": settingData,
+		success: function(ret) {
+			closeUploading();
+			jQuery("#settingInfo ol").append("<li>$onekey.set$</li>");
+			jQuery("#settingInfo ol").append("<li>$onekey.all$!</li>");
+			SysReboot('$onekey.all$');
+		}
+	});
+}
+
+
+function getUpgradeStatus(type) {
+	var data = {"actioncode": "112"};
+	jQueryAjaxCmd({
+		"data": data,
+		success: function(ret) {
+			if(ret == "1"){
+				if(type == 1) {
+					jQuery("#settingInfo ol").append("<li>$uploadFileSuccess$</li>");
+					window.clearInterval(intervalId);
+					// 第三步 设置序列号等信息
+					setTimeout("toolsUpgrade()", 5000);
+				} else if (type == 2){
+					jQuery("#settingInfo ol").append("<li>$uploadFileSuccess$</li>");
+					window.clearInterval(intervalId);
+					// 第4步 设置序列号等信息
+					setTimeout("oneSetSerialNo()", 5000);				
+				}
+			}
+			else if(ret == "2"){
+				jQuery("#settingInfo ol").append("<li><font color=\"#FF0000\">$uploadFileFail$</font></li>");
+				alert('$uploadFileFail$');
+				closeUploading();
+				window.clearInterval(intervalId);
+			} 
+			else if (ret == "3") {
+				jQuery("#settingInfo ol").append("<li><font color=\"#FF0000\">$uploadFileFail$</font></li>");			
+				alert('$uploadFileError$');
+				closeUploading();
+				window.clearInterval(intervalId);
+			}
+		}
+	});
+}
+
+function oneUpgrade() {
+	jQuery("#settingInfo ol").append("<li>$onekey.uping$</li>");
+	jQuery('#wmform1').submit();
+	intervalId = setInterval("getUpgradeStatus(1)", 2000);
+}
+
+function toolsUpgrade() {
+	jQuery("#settingInfo ol").append("<li>$onekey.toolsing$</li>");
+	jQuery('#wmform2').submit();
+	intervalId = setInterval("getUpgradeStatus(2)", 2000);
+}
+
+function FormatEnd() {
+	var data = {"actioncode": "900"};
+	jQueryAjaxCmd({
+		"data": data,
+		success:function(ret) {
+			window.clearInterval(intervalId);
+		}
+	});
+}
+
+function closeingOK() {
+	var data = {"actioncode": "900"};
+	jQueryAjaxCmd({
+		"data": data,
+		success:function(ret) {
+			window.clearInterval(formatIntervalId);
+		}
+	});
+} 	
+
+function getFormatStatus(){
+	var data = {"actioncode": "113"};
+	jQueryAjaxCmd({
+		"data": data,
+		success: function(ret) {
+			if(ret == "1"){
+				jQuery("#settingInfo ol").append("<li>$partition.btn$$partition.disk$$partition.success$!</li>");
+				window.clearInterval(formatIntervalId);
+				formatIntervalId = setInterval("closeingOK()", 1000);
+				// 第二步上传升级文件
+				setTimeout("oneUpgrade()", 15000);
+			}else if(ret == "2"){
+				jQuery("#settingInfo ol").append("<li><font color=\"#FF0000\">$partition.btn$$partition.disk$$partition.fail$</font></li>");
+				SysReboot('$partition.btn$$partition.disk$$partition.fail$');
+				parent.closeUploading();
+				window.clearInterval(formatIntervalId);
+				formatIntervalId = setInterval("closeingOK()", 1000);
+			} 
+			
+		}
+	});
+}
+
+function onePartitionDisk() {
+	var data = {
+		"actioncode": "448"
+	};
+	jQueryAjaxCmd({
+		"data": data,
+		success:function(ret) {
+			if(ret == 1) {
+				openUploading();
+				jQuery("#settingInfo ol").append("<li>$onekey.parting$</li>");
+				formatIntervalId = setInterval("getFormatStatus()", 2000);
+			}else{
+				alert('$input.failure$');
+			}
+		}
+	});
+}
+
+
+jQuery(function() {
+	initFormValidation();
+	
+	jQuery("input[type=file]").filestyle({ 
+	     image: "../fileStyle/css/choose-file.png",
+	     imageheight : 22,
+	     imagewidth : 52,
+	     width : 180
+	 });
+	
+	/*
+	 * 初始化设置和刷新按钮事件
+	 */
+	jQuery('#btnSet').click(function() {
+		var validate = validateFormByID('wmform');
+		if(validate) {
+			// 第一步执行格式化
+			onePartitionDisk();
+		} else {
+			return false;
+		}
+	});
+
+	jQuery('#restartBtn').click(function() {
+		alert('$resetdefault.reboot$');
+		var data = {"actioncode": "215"};
+		jQueryAjaxCmd({
+			"data": data,
+			success: function(ret) { 
+				if(ret == "1"){
+					falert('$falert.ok$', '$resetdefault.reboot$');
+					window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+				} else{
+					falert('$falert.ok$', '$uploadstateerror1$');
+				}
+			}
+		});	
+	});
+});
+</script> 

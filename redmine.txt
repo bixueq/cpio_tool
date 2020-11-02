@@ -1,0 +1,34 @@
+o解压方法：
+
+    1.  # gunzip  XXX.cpio.gz
+
+    2. cpio -idmv < XXX.cpio
+
+
+
+制作cpio格式文件系统的方法：
+
+    1. 执行gen_initramfs_list.sh脚本：
+
+    #　gen_initramfs_list.sh ./Filesystem/ >filelist  
+
+    其中Filesystem文件夹是由上一步解压出来的cpio文件系统目录
+
+    2. 执行gen_init_cpio产生cpio文件：
+
+    # 　gen_init_cpio filelist >rootfs.cpio
+
+    ３.　压缩cpio生成cpio.gz文件：
+
+    #  gzip rootfs.cpio
+
+
+
+所使用文件说明：
+
+gen_initramfs_list.sh：用于产生filelist
+
+gen_init_cpio.c ：工具gen_init_cpio的源码，编译后可以用
+
+gen_init_cpio：用于产生cpio格式文件系统的可执行文件
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<devinfo>
+	<type>0</type>
+	<softlang>1</softlang>
+	<copyright>0</copyright>
+	<ServerSeries>null</ServerSeries>
+	<ServerType>null</ServerType>
+	<R11SoftnameCN>锐取智慧教育跟踪录播主机管理系统软件V1.0</R11SoftnameCN>
+	<R11SoftnameUS>Intelligent track recording managemen v1.0</R11SoftnameUS>
+	<R6SoftnameCN>锐取多媒体录播一体机软件V1.0</R6SoftnameCN>
+	<R6SoftnameUS>Multimedia integrated machine v1.0</R6SoftnameUS>
+	<R11Softtype>ITS-1100</R11Softtype>
+	<R6Softtype>Mul-5000</R6Softtype>
+	<Microlecture>null</Microlecture>
+	<copyrightCN>Copyright(C)深圳锐取信息技术股份有限公司</copyrightCN>
+	<copyrightUS>Copyright(C)SZ REACH TECH CO., LTD.</copyrightUS>
+</devinfo>

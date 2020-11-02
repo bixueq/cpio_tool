@@ -1,0 +1,102 @@
+<form enctype="multipart/form-data" id="wmform" method="post" target="upload" action="encoder.cgi">
+	<table width="753" border="0">
+		<tr>
+			<td width="28%" class="$image_prex$itemnametd" align="right">$remotectrl.protocolupload$</td>
+			<td>
+				<input type="file" name="file" />
+				<input type="hidden" name="actioncode" value="413">
+				<input id="submitBtn" type="button" style="margin-left:70px;margin-top:-10px;" class="$image_prex$click_btn" value="$titlelogo.upload$" />
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td><td></td>
+		</tr>
+		<tr>
+		  <td width="28%" class="$image_prex$itemnametd" align="right">$remotectrl.ptzprotocal$</td>
+		  <td width="72%">
+		    <select name="ptzProtocal" id="ptzProtocal">
+		    </select>
+			<input id="saveBtn" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" type="button" value="$btn.save$"/>
+		    <input id="btnDelete" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" type="button" value="$remotectrl.delete$" style="margin-left: 17px"/>
+		  </td>
+		</tr>
+		<tr>
+		    <td height="45px" colspan="2" align="center" style="padding-top: 20px;">
+		        
+		    </td>
+		</tr>
+	</table>
+</form>
+<iframe name="upload" style="display:none"></iframe>
+<script>
+function setProtoList(opts){
+	var protoSel = document.getElementById("ptzProtocal");
+	protoSel.options.length = 0;
+	for(var i = 0; i < opts.length; i++){
+		if(!opts[i])
+			continue;
+		var option = document.createElement('option');
+		option.value = opts[i];
+		option.innerHTML = opts[i];
+		protoSel.appendChild(option);
+	}
+}
+jQuery(function() {
+	jQuery("input[type=file]").filestyle({ 
+	 image: "../fileStyle/css/choose-file.png",
+	 imageheight : 22,
+	 imagewidth : 52,
+	 width : 180
+	});
+	 
+	initFormValidation();
+	
+	/*
+	 * init event handlers for the buttons.
+	 */
+	jQuery('#refreshBtn').click(function() {
+		jQuery('#menuf').click();
+	});
+	
+	jQuery('#submitBtn').click(function() {
+		jQuery('#wmform').submit();
+		openUploading();
+	});
+	
+	jQuery('#saveBtn').click(function() {
+		var proto = jQuery("#ptzProtocal").val();
+		var data = {"actioncode": "412", "ptzProtocal": proto, "dataType": "text"};
+		if(!proto) {
+			return;
+		}
+		jQueryAjaxCmd({
+			"data": data,
+			success: function(ret) {
+				if(ret == 1) {
+					alert('$opt.success$');
+				}
+			}
+		});
+	});
+	
+	jQuery('#btnDelete').click(function(){
+		if(!confirm("$remotectrl.deleteconfirm$")){
+			return;
+		}
+		var proto = jQuery("#ptzProtocal").val();
+		var data = {"actioncode": "414", "ptzProtocal": proto, "dataType": "text"};
+		if(!proto) {
+			return;
+		}
+		jQueryAjaxCmd({
+			"data": data,
+			success: function(ret) {
+				if(ret == 1) {
+					alert('$opt.success$');
+					jQuery("#menuf").click();
+				}
+			}
+		});
+	});
+});
+</script> 

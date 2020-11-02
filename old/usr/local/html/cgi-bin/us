@@ -1,0 +1,699 @@
+﻿!--addrecord.jsp
+Dev_name=TKR9000
+TITLE=Encoder
+login.fontsize=4.5
+login.username=User name...
+login.password=Password...
+login.button=Login
+login.downloadcenter=Download Center
+ini.companyname=Copyright (C) 2017-2020 SZ REACH TECH CO., LTD.
+ini.companyname_own=Copyright (C) 2006 - 2016
+
+UserOrPasswordError=Incorrect username or password! Please try again. 
+systemset=System information settings
+sytemInfo=System information
+channelnum=Channel numbers
+systemname=Name:
+systemversion=Version
+networkset=Network settings
+sys_op.attention4=IP address:
+sys_op.submask=Subnet mask:
+sys_op.defaultNetgate=Default gateway:
+lanIPAdresWrong=Incorrect IP address!
+lansubnetmaskwrong=Incorrect subnet mask!
+langatewaywrong=Incorrect gateway!
+sys_op.updatesystem=System update
+sys_op.updateFile=Updated file：
+sys_op.attention1=1.It requires a while to upload updated files, please do not operate other manipulations  　　　　
+sys_op.attention2=2.Please restart the encoder after uploading updated files to finish system update. 
+savefailed=Save failed!
+savesucess=Save succeeded!
+setsuccess=Setting succeeded!
+setfailed=Setting failed!
+uploadstateerror1=Restart is invalid during recording!
+uploadstateerror=Update is invalid during recording!
+
+!--down.jsp
+copyright=copyright
+
+image_prex=US_
+lang_suffix=zh_CN
+
+!--login.java
+loginSystem=Log in system!
+userIsNotExist=User doesn’t exist, please check it
+passwordWrong=Password incorrect, please check it
+
+!--deltype.java
+dDeleteType=File Type. \nType name:
+dRemark=\nRemark:
+dDeletedTypeNotExist=Deleted type not exist
+
+!--detailfile.java
+fileNotExist=File not found, please check it!
+
+!--file.java
+modifyFileInfo=Modify file information.\nFile source: 
+sourceFileInformation=\nSource file information: \nFile name:
+fDesc=\nDescription
+changeTo= \nEdit as\nfile name:
+fType=\nType:
+fDesc=\nDescription:
+fSize=\nSize:
+fRecordTime=M\nRecording Time
+fSource=\nSource:
+fDeleteFileSuccess=Delete file successed. \n
+fDeleteFileFail=Delete file failed. \n
+
+!--ftpuploadfile.java
+binfile=Please choose the file uses "bin" as file extension name. 
+bmpfile=Please choose the file uses "jpg" as file extension name. 
+pngfile=Please choose the file uses "png" as file extension name. 
+uploadUpdateFileFail=Upload updated file failed.
+uploadFileFail=Upgrade file failed.
+uploadFileFail1=Upload failed.
+uploadFileError=Upload file error.
+uploadFileSizeFailed=File size illegal. 
+uploadUpdateFileSuccess=Upload updated file succeeded. \nfile name:
+uploadFileSuccess=Upgrade file succeeded.
+uploadFileSuccess1=Upload succeeded.
+
+!--updatefile.java
+plsInputFileName=Please enter the file name!
+illegalFileName=Illegal file name, please check it!
+fileIsExist=File name already exists, please check it!
+
+!--syntime.java
+synchnizedServerTimeSuccess= Synchronize encoder time succeeded. \nOriginal time
+newTime=\nNew time:
+synchronizedTimeSuccess=Synchronize time succeeded!
+synchronizedServerTimeFail=Synchronize encoder time failed.
+synchronizedTimeFail= Synchronize time Failed!
+
+!--updateuser.java
+plsInputName=Please enter username!
+userIsExist=Username already exists!
+passwordIsNull=Password can't be null!
+passwordTwiceInputNotSame=Password entered differently from last time!
+usernameNotExist=User name doesn't exist!
+password.fail=Password change failed!
+
+userNotExist=User doesn’t exist.
+
+userNotExistNUser=User doesn’t exist or doesn’t belong to common users!
+admin.yes=yes
+admin.no=no
+
+recon=Reconnecting times
+unlimited=Unlimited times
+noconnect=Disconnect
+
+g_view.name=Add new user group
+zeroing=Set to 0
+
+file.recordpause=Recording pause
+file.zeroing=Set to 0 or not?
+
+addtype.file=All files in this type:
+setUser2Group.usergroup=User group
+
+recon=Reconnecting times
+unlimited=Unlimited times reconnecting
+disable=Not reconnecting
+
+continuerecording=Continue Recording
+continueRecord.channel=Channel number:
+
+userlist=Group user list:
+addgroup.addusertogroup=Add user to group:
+addgroup.add=Add:
+detailroom.rate=Bandwidth:
+
+sys_op.advancedpage=Advanced options
+
+loading=loading....
+
+language.type=Zone:
+
+locale.english=English
+
+locale.chinese=Simplified Chinese
+
+locale.tranditional=Traditional Chinese
+
+language=language
+
+sys_op.setFileLen=Maximum recording file time
+
+
+!--jsp
+
+tmp.title=：：：
+tmp.video=VIDEO：
+tmp.dvi=DVI：
+tmp.audio=Audio：
+zb1.alertmulti=Multicast is closed, please open it and login again！
+
+
+systemhtml1=Kernel version:
+systemhtml2=System version:
+systemhtml3=FPGA version:
+systemhtmlIPAddress=IP address:
+systemhtmlSubnetMask=Subnet mask:
+systemhtmlGateway=Gateway:
+systemhtmlMAC=MAC address:
+oldpassword=Old password:
+oldpassword=Old password entered wrong!
+modifyIPFailed=Modify IP failed
+bgloginjpg=login_bg.jpg
+bgloginjpg_own=login_bg_own.jpg
+topGif=top.gif
+topGif_own=top_own.gif
+
+!--opt
+opt.success=Operation completed!
+opt.faild=Operation failed!
+opt.inputErr=Input error!
+opt.warning=Operation succeeded, the system will automatic restart!
+opt.confirm=It takes effect after restart, continue to restart?
+opt.downloaderror=Device is recording. Operation failed!
+uploadstateerror= Device is recording. Operation failed!
+
+opt.reboottitle=Tips
+opt.rebootcontent=System needs to restart, please choose to restart the way!
+opt.rebootok= Immediately restart
+opt.rebootcancel=Manual restart
+
+opt.repair=Start repair courseware...
+opt.repairing=Repairing...
+opt.norepair=Courseware normal!
+opt.cerror=Courseware anomaly!
+opt.recording=Recording...
+
+!--index.html
+index.logout=Log out
+index.settings=Video Settings
+index.administration=System Config
+index.systeminfo=System Info
+index.filemgr=File Management
+index.taskmgr=Scheduled Task
+
+!--leftmenuParamsSettings.html
+leftmenu.videosource=Input
+leftmenu.moviemodel=Output
+leftmenu.trackingset=Track
+leftmenu.interactset=Classroom
+leftmenu.outputset=Stream
+
+
+!--leftmenuSystemSettings.html
+leftmenu.network=Network
+leftmenu.user=User
+leftmenu.log=Log
+leftmenu.system=System
+leftmenu.sysupgrade=System upgrade
+leftmenu.sysrestore=Factory reset
+leftmenu.ftp=Platform settings
+leftmenu.deviceset=Central control
+
+
+
+!--input.html
+input.input1=VGA1
+input.input2=VGA2
+input.detail=Details
+input.colorspace=Color space:
+input.HDCP=HDCP:
+input.screenadjust=VGA fine tuning
+input.default=Reset
+input.high=High
+input.mid=Medium
+input.low=Low
+input.refresh=Refresh
+input.save=Save
+input.inputType=Signal source type:
+input.ok=OK
+input.cancel=Cancel
+input.colorcbcr=Red&Blue calibrate:
+input.colorcbcrbtn=Calibrate
+input.inputtypeconfirm=The input source is switched, are you sure to restart?
+input.sdiajust=SDI tuning:
+input.hdinput=Scenario information:
+input.sdinput=Image fine tuning
+input.weitiao=Tuning ratio
+input.up=Up
+input.down=Down
+input.left=Left
+input.right=Right
+input.middle=Reset
+input.hdinput1=Teacher close-up
+input.hdinput2=Student close-up
+input.hdinput3=Platform panorama
+input.hdinput4=Student panorama
+input.hdinput5=Blackboard close-up1
+input.hdinput6=Blackboard close-up2
+input.notice=(Note: It takes effect after restart)
+input.success=Operation succeeded.
+input.failure=Operation failed.
+
+input.signname=Scenario
+input.signstatus=Signal status
+input.portsign=Interface figure
+input.portname=Interface name
+input.comname=Serial Port(Address)
+
+
+!--network.html
+network.title=Network card
+network.dhcp=DHCP:
+network.enable=Enable
+network.ip=IP Address:
+network.mask=Subnet mask:
+network.gateway=Gateway:
+network.refresh=Refresh
+network.save=Save
+network.confirm=OK
+network.ok=OK
+network.cancel=Cancel
+network.networksetfirm=The network setting will take effect after restart.The system will restart immediately, are you sure to continue?
+network.invalid=The IP is invalid
+
+
+!--modifypassword.html
+updatepassword.title1=Administrator password
+updatepassword.title2=User password
+updatepassword.title=Modify password
+updatepassword.username=User name:
+modifyPasswordSuccess=Modify password succeeded
+updatepassword.oldpw=Current password:
+updatepassword.newpw=New password:
+updatepassword.confirmpw=New password confirm:
+updatepassword.save=Save
+updatepassword.nopermission=You can only modify your own password.
+updatepassword.notice=Please use the new password to login director and Media Center after modification. 
+
+
+!--otherset.html
+systemset.zoommodel=Advanced encoding settings
+systemset.enclevel=Encoding level:
+systemset.highprofile=High profile
+systemset.baseline=Base line
+systemset.encodertime=Server time:
+systemset.timesynch=Synchronize time
+systemset.timeset=System time
+systemset.reboot=System restart
+systemset.save=Save
+
+
+!--sysupgrade.html
+sysupgrade.title=System upgrade
+sysupgrade.file=Upgrade file:
+sysupgrade.upgrade=Upgrade
+sysupgrade.rebootconfirm=It will take effect after restart, 'Ok' to immediately restart, 'Cancel' to manually restart.
+
+
+!--resetdefault.html
+resetdefault.title=Version reversion
+resetdefault.restore=Version reversion
+resetdefault.reboot=System restart
+resetdefault.rebootconfirm=Are you sure to restart the system?
+resetdefault.synrebootconfirm=Synchronization time requires restarting system,restart now?
+resetdefault.ok=OK
+resetdefault.cancel=Cancel
+resetdefault.confirm=OK
+
+
+
+!--sysinfo.html
+sysinfo.title=System information
+sysinfo.seriesno=Serial No.:
+sysinfo.model=Equipment type:
+sysinfo.webversion=Web version:
+sysinfo.aiosysversion=Server system version:
+sysinfo.aiosysenctime=Server encoding time:
+sysinfo.hdsysversion=HD board system version:
+sysinfo.hdsysenctime=HD board compilation time:
+sysinfo.harddiskspace=Disk space:
+sysinfo.freediskspace=Free space:
+sysinfo.formatdisk=Format disk:
+sysinfo.format=Format
+sysinfo.formatConfirm=Confirm to format?
+sysinfo.roomType=Classroom type:
+sysinfo.platformtype=Platform Type:
+sysinfo.platformip=Platform IP:
+sysinfo.keyupload=Upload key:
+sysinfo.keydownload=Download key:
+sysinfo.Exception=Exception
+sysinfo.set=Save
+sysinfo.zhongkongIP=Central control IP:
+sysinfo.key=Key:
+
+merge.title=Image layout settings
+merge.resolution=Output resolution:
+merge.layout=Layout:
+merge.layouttext=Layout
+merge.status=Image synthesis switch:
+merge.enable=Enable
+merge.disable=Disable
+merge.switch=Switch window:
+merge.switchbtn=Switch
+
+
+!--filemgr.html
+filemgr.deleteconfirm=Are you sure to delete this file?
+filemgr.downloadfirm=Have you already inserted USB to the server?
+filemgr.title=File Management
+filemgr.serial=NO.
+filemgr.filename=File Name
+filemgr.note=Notes
+filemgr.date=Date
+filemgr.size=Size
+filemgr.uploadStatus=Status
+filemgr.op=Operation
+filemgr.play=Play
+filemgr.repair=Repair
+filemgr.rename=Rename
+filemgr.delete=Delete
+filemgr.adv_download=Advanced Download
+filemgr.download=Download
+filemgr.upload=Upload
+filemgr.upload0=Not Upload
+filemgr.upload1=Uploaded
+filemgr.upload2=Uploading
+filemgr.upload3=Upload Failed
+filemgr.upload4=Anomaly
+filemgr.upload5=Repairing
+filemgr.upload6=Repair Pause
+filemgr.upload7=Repaired
+filemgr.first=First page
+filemgr.last=Last page
+filemgr.pre=Previous
+filemgr.next=Next
+filemgr.msgcontainschines=The file name can only consist letters, numbers and underline.
+filemgr.save=Tip:Right-click the file name link and select "save as" to download the video file.
+filemgr.search=Search
+filemgr.deletesuccess=Deletion succeeded!
+filemgr.deletefailed=Deletion failed!
+filemgr.copysuccess=Copy succeeded!
+filemgr.copyfailed=Copy failed!
+filemgr.Ucopy=USB disk copy
+filemgr.selectPart=Select partition:
+filemgr.part=Partition
+filemgr.copybtn=One-key copy
+filemgr.refresh=Refresh
+filemgr.ftpMgr=File management
+filemgr.ftptooldownload=FTP tool download
+filemgr.usbbad=USB exception, please check the divice.
+filemgr.nopartSelect=Please select partition.
+filemgr.usbno=Unable to detect USB disk.
+filemgr.usbnospace=Not enough storage.
+filemgr.usbcoping=USB disk is copying.
+filemgr.iscopyping=Recording, copy is not allowed
+filemgr.createFile=Refresh
+filemgr.repairFile=Repair file list
+filemgr.onlyMovie=Only display movie mode courseware
+filemgr.warn=(Warn:Overabundance courseware, please clean the disk)
+filemgr.downloadTools=Please use IE browser and install downloading tools,sure to download and install?
+filemgr.except=(All the characters except \n`,~,!,@,#,$,%,^,&,*,(,),\',\",\,,\\,/,<,>,?)
+filemgr.diskspace=Disk space:
+filemgr.disknotes=Free, Total
+
+paper.gotopage=Jump to page
+paper.page=Page
+paper.to=Go
+paper.total=Total
+paper.curPage=Current page
+paper.numData=Data bar
+paper.num=Number
+btn.save=Save
+falert.ok=OK
+falert.cancel=Cancel
+
+
+!--deviceset.html
+deviceset.zhongkongIp=Central control IP:
+deviceset.guangdianIp=Recording IP:
+deviceset.notice=(Note: It takes effect after restart.)
+
+
+
+!--ftp.html
+ftp.title=Platform access configuration
+ftp.title1=RTMP access configuration
+ftp.title2=Recording access configuration
+ftp.port=Server port:
+ftp.address=Server address:
+ftp.path=Server path:
+ftp.username=Server user name:
+ftp.password=Server password:
+ftp.status=Enable FTP automactically:
+ftp.notice=Note:
+ftp.noticeCon=Enable FTP will disconnect recording system and media center!
+ftp.set=FTP Settings
+ftp.ok=OK
+ftp.cancel=Cancel
+ftp.setconfirm=The system will restart after configuration, are you sure to continue?
+ftp.rebootfailrecording=Setting failed during recording. Please stop recording to make it work.
+ftp.success=Save succeeded!
+ftp.fail=Save failed.
+ftp.save=Save
+ftp.platform=Access type:
+ftp.platform.type1=Media Center
+ftp.platform.type2=Sola
+ftp.platform.type3=Jinkun
+ftp.platform.type4=Third Party FTP
+ftp.platform.type6=Cloud Resource Center
+ftp.platform.address=Platform IP:
+ftp.platform.code=Platform access code:
+ftp.movie.hd=HD movie mode:
+ftp.movie.sd=SD movie mode:
+ftp.rtmp.notice=For instance:
+ftp.rtmp.noticeCon=rtmp://127.0.0.1
+ftp.radioTV.address=Radio TV IP:
+ftp.upload=Courseware upload:
+ftp.upload.movie=Movie model
+ftp.upload.resource=resource model
+
+!--movieModel.html
+movieModel.title=Output resolution Setting
+movieModel.hdmires1=HDMI1:
+movieModel.hdmires2=HDMI2:
+
+movieModel.restartsave=Save
+movieModel.params=Movie mode encoding parameter
+movieModel.mergeres=Synthetic Resolution
+movieModel.mergeModel=Auto-director Synthetic Mode:
+movieModel.mergelayout=Layout
+movieModel.ok=OK
+movieModel.cancel=Cancel
+movieModel.rebootconfirm=The system will restart, are you sure to continue?
+movieModel.rebootsuccess=Saving succeeded,restart immediately!
+movieModel.rebootfail=Saving failed!
+movieModel.rebootfailrecording=Saving succeeded, recording is in process, settings will take effect after restart!
+
+
+!--interactSet.html
+interactSet.Director=Director Control System
+interactSet.Class=Recorded The Classroom
+interactSet.listenRoom=Additional recorded:
+interactSet.ClassType=Classroom type:
+interactSet.ClassType1=Ordinary
+interactSet.ClassType2=Interactive
+interactSet.ClassType3=Third party interactive
+interactSet.RecType1=Local Lecture Video 
+interactSet.RecType2=Mainstream + Auxiliary flow + Remote video
+interactSet.TypeDL=Local Director Control System
+interactSet.TypeDN=Net Director Control System
+interactSet.TypeT=Lecture
+interactSet.TypeS=Listening
+interactSet.restartsave=Save
+interactSet.rebootsuccess=Saving succeeded,restart immediately!
+interactSet.rebootfailrecording=Saving succeeded, recording is in process, settings will take effect after restart!
+interactSet.rebootfail=Saving failed!
+interactSet.fail=Save failed! Under the current additional recording content, can not use Net Director Control System.
+interactSet.lock=Please unlock before using this feature!
+!--trackingSet.html
+trackingSet.jiweiSet=Tracking Camera:
+trackingSet.jiwei4=2-camera
+trackingSet.jiwei5=3-camera
+trackingSet.jiwei6=4-camera
+trackingSet.IPCam0=Teacher tracking Camera:
+trackingSet.IPCam1=Blackboard close-up 1:
+trackingSet.IPCam2=Blackboard close-up 2:
+trackingSet.IPCam3=Students tracking Camera 1:
+trackingSet.IPCam4=Students tracking Camera 2:
+trackingSet.IPCam5=Students tracking Camera 3:
+trackingSet.IPCam6=Students tracking Camera 4:
+trackingSet.restartsave=Save
+trackingSet.rebootsuccess=Operation succceded, The system will automatic restart immediately.
+trackingSet.rebootfail=Operation failed!
+trackingset.rebootconfirm=The system will restart, are you sure to continue?
+trackingset.connsuccess=Connected.
+trackingSet.rebootfailrecording=Operation succeeded and recording is in progress. Settings will take effect after restart.
+trackingSet.dis0=2-camera(teacher+students)
+trackingSet.dis1=4-camera1(teacher+students+blackboard+students panorama)
+trackingSet.dis2=5-camera1(teacher+students+blackboard+students panorama+teacher panorama)
+trackingSet.dis3=5-camera2(teacher+students+blackboard+students panorama+blackboard)
+trackingSet.dis4=3-camera1(teacher+students+blackboard)
+trackingSet.dis5=3-camera2(teacher+students+teacher panorama)
+trackingSet.dis6=4-camera2(teacher+students+teacher panorama+students panorama)
+trackingSet.dis7=3-camera3(teacher+students+students panorama)
+trackingSet.dis8=4-camera3(teacher+students+blackboard+teacher panorama)
+trackingSet.dis10=6-camera1(teacher+students+blackboard1+students panorama+teacher panorama+blackboard1)
+trackingSet.dis11=6-camera2(teacher+students1+students2+students panorama+teacher panorama+blackboard)
+trackingSet.dis50=4-camera4(teacher+student1+student2+students panorama(in same classroom))
+trackingSet.dis51=4-camera5(teacher+student1+student2+students panorama(in different classrooms))
+trackingSet.dis100=3-camera:(teacher+students+blackboard)
+trackingSet.dis101=4-camera:(teacher+front student+blackboard+back student)
+trackingSet.disno=None
+
+
+!--downloadcenter.html
+dlcenter.dlcenter=Download Center
+dlcenter.login=Homepage
+dlcenter.platform=Support Platform:
+dlcenter.download=Download
+dlcenter.desc1= Media control debugging tools.
+dlcenter.desc2=DirectorEx is a director software,which used to set Tracing & Recording parameters. 
+dlcenter.desc3=ReachDownload is used in system file advanced download. 
+dlcenter.desc4=PPTIndex is used to automatic generate words index. 
+dlcenter.desc5=KiteTool is used to automatic debug tracking process. 
+dlcenter.warning=Note:The current toolkit version is too old, please update it.
+dlcenter.userTool=User essential tools
+dlcenter.engineer=Engineer essential tools
+
+
+!—logmgr.html
+logmgr.logMgr=Log management
+logmgr.name=Courseware name
+logmgr.starttime=Start time
+logmgr.endtime=End time
+logmgr.duration=Courseware time duration
+logmgr.status=Status
+logmgr.refresh=Refresh
+logmgr.search=Search
+
+
+
+!--output.html
+output.id=Stream ID
+output.input=Input
+output.broadcast=Broadcast address
+output.protocal=Protocol
+output.port=Port
+output.status=Status
+output.detail=Detail
+output.add=Add
+output.rtspconfig=RTSP Settings
+output.refresh=Refresh
+output.save=Save
+output.rtspsettitle=RTSP Settings
+output.ok=OK
+output.cancel=Cancel
+output.mustmultiIP=Saving failed! Invalid IP !
+output.playurl=Play address
+
+
+
+--output_rtspSet.html
+outputrtspset.serverport=RTSP server port:
+outputrtspset.warning=(Note:It takes effect after restart)
+outputrtspset.active=Activation time
+outputrtspset.mtu=MTU:
+outputrtspset.input=Input:
+outputrtspset.quality=Stream quality:
+outputrtspset.streammode=Streaming mode:
+outputrtspset.multiIP=Multi IP:
+outputrtspset.multiport=Multi port:
+outputrtspset.second=second
+outputrtspset.sdp=SDP:
+outputrtspset.download=Download
+
+
+
+
+!--output_detailSet.html
+outputdetailset.protocal=Protocal:
+outputdetailset.IP=IP:
+outputdetailset.videoport=Video port:
+outputdetailset.audioport=Audio port:
+outputdetailset.mtu=MTU:
+outputdetailset.ttl=TTL:
+outputdetailset.tos=TOS:
+outputdetailset.tc=Stream control
+outputdetailset.open=Enable
+outputdetailset.ceiling=Ceiling(%):
+outputdetailset.avgbandwidth=Average Bandwidth:
+outputdetailset.ceilingbandwidth=Ceiling Bandwidth:
+
+
+!--output_addSet.html
+outputaddset.displayselect=Select image:
+outputaddset.display=Image
+outputaddset.quality=Quality:
+outputaddset.protocal=Protocal:
+outputaddset.IP=IP:
+outputaddset.videoport=Video port:
+outputaddset.audioport=Audio port:
+outputaddset.mtu=MTU:
+outputaddset.ttl=TTL:
+outputaddset.tos=TOS:
+outputaddset.tc=Stream control:
+outputaddset.open=Enable
+outputaddset.ceiling=Ceiling(%):
+!--taskMgr.html
+taskMgr.serial=NO.
+taskMgr.title=Title
+taskMgr.speaker=Speaker
+taskMgr.startTime=Start Time
+taskMgr.endTime=End Time
+taskMgr.optLive=Live
+taskMgr.optRecord=Record
+taskMgr.openStatus=Open
+taskMgr.closeStatus=Close
+user.login=User login
+system.title=Recording system
+!--output.html
+output.http=HTTP
+output.rtmp=RTMP 
+output.rtmp_hight=RTMP(HD) 
+output.rtmp_low=RTMP(SD) 
+output.rtspconfig=RTSP settings 
+output.refresh=Refresh 
+output.save=Settings 
+output.rtspsettitle=RTSP settings 
+output.ok=OK 
+output.cancel=Cancel 
+output.mustmultiIP=Save failed, IP must be a multicast IP! 
+output.portSame=Please enter a different video port and audio port! 
+output.active=Enabled
+output.stop=Stop 
+output.remove=Delete 
+output.notUni=Unopened 
+output.operating=Operation
+output.permissions=Permissions 
+output.OpenUni=Live
+
+outputdetailset.protocal=Protocol: 
+outputdetailset.IP=IP: 
+outputdetailset.videoport=Video port: 
+outputdetailset.audioport=Audio port: 
+outputdetailset.mtu=MTU: 
+outputdetailset.ttl=TTL: 
+outputdetailset.tos=TOS: 
+outputdetailset.tc=Stream control : 
+outputdetailset.permissions=Permission settings: 
+outputdetailset.permissionsEnable=Open 
+outputdetailset.permissionsDisable=Close 
+outputdetailset.open=Open
+
+stream.noconnect=Not connected 
+stream.connect=Connected
+stream.titlelen=8%%
+stream.urllen=42%%
+stream.permislen=10%%
+stream.livelen=5%%
+stream.statuslen=13%%
+stream.operationlen=9%%
+stream.statusMarginLen=5px
+stream.operationSet=10px

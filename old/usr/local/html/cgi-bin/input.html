@@ -1,0 +1,147 @@
+<form id="wmform">
+	<table width="753" border="0">
+      <tr>
+        <td width="30%" height="35" align="right" class="$image_prex$itemnametd">$input.inputselect$</td>
+        <td width="70%"><input type="checkbox" />&nbsp;$input.childstream$</td>
+      </tr>
+      <tr>
+        <td height="38" align="right" class="$image_prex$itemnametd">$input.colorspace$</td>
+        <td>
+        <select name="inputType" class='wmform_zebra'>
+          <option value="2">RGB</option>
+          <option value="3">YPbPr</option>
+        </select>	
+        </td>
+      </tr>
+      <tr>
+        <td height="103" align="right" class="$image_prex$itemnametd">$input.screenadjust$</td>
+        <td><div style="border: 1px solid #186FCA;height: 110px;margin-bottom: 10px;padding-left: 10px;padding-top: 20px; width: 330px;"><div class="adjust_screen">
+	  <div name="adbtn8" class="up adbtn"></div>
+	  <div name="adbtn7" class="down adbtn"></div>
+	  <div name="adbtn6" class="left adbtn"></div>
+	  <div name="adbtn5" class="right adbtn"></div>
+	  <div name="adbtn0" class="middle adbtn"></div>
+	  <div class="adjust_range">
+		<input style="margin-left:10px; margin-right:4px;" checked name="range" type="radio" value="1" />$input.low$
+		<input style="margin-left:10px; margin-right:4px;" name="range" type="radio" value="5" />$input.mid$
+	    <input style="margin-right:4px;" name="range" type="radio" value="10" />$input.high$
+	  </div>				  
+   </div></div></td>
+      </tr>
+      <tr>
+    	<td height="45px" colspan="2" align="center" style="padding-top: 20px;">
+        	<input id="saveBtn" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" type="button" value="$btn.save$" />
+        </td>
+      </tr>
+    </table>
+</form>
+<script>
+function initSceneSet() {
+	if(jQuery('#sceneSet').val()==3) {
+		jQuery('#advancedSet').prop('disabled', false).css({'color': '#276CD7'});
+	} else {
+		jQuery('#advancedSet').prop('disabled', true). css({'color': '#808080'});
+	}
+}
+
+jQuery(function() {
+	
+	//表单赋值操作必须在表单美化之前，所以美化代码放置在cgi中
+	
+	//初始化sceneSet事件
+	jQuery('#sceneSet').change(initSceneSet);
+	
+	/*
+	 * 初始化设置和刷新按钮事件
+	 */
+	jQuery('#setbtn').click(function() {
+		var validate = validateFormByID('wmform');
+		if(validate) {
+			var data = {"actioncode": "401"};
+			var params = getFormItemValue('wmform');
+			if(params) {
+				jQuery.extend(data, params);
+			}
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					//alert(ret);
+					if(ret == 1) {
+						alert('$opt.success$');
+					}
+				}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('#refreshbtn').click(function() {
+		jQuery('#menub').click();
+	});
+	
+	/*
+	 * 初始化表单验证
+	 */
+	initFormValidation();
+	
+	jQuery('#advancedSet').click(function() {
+		closeAllPrompt();
+		jQueryAjaxHtml({
+			data: {"actioncode": "318"},
+			success: function(innerStr) {
+				art.dialog({
+					title: '$video.advancedsettitle$',
+					okValue: '$video.ok$',
+					cancelValue: '$video.cancel$',
+					lock: true,
+					fixed: true,
+					background: '#600', // 背景色
+					opacity: 0.87, // 透明度
+					content: innerStr,
+					ok: function(){
+						var validate = validateFormByID('wmform_videoAdvancedSet');
+						if(validate) {
+							var data = {"actioncode": "415"};
+							var params = getFormItemValue('wmform_videoAdvancedSet');
+							if(params) {
+								jQuery.extend(data, params);
+							}
+							jQueryAjaxCmd({
+								"data": data,
+								success: function(ret) {
+									if(ret == 1) {
+										alert('$opt.success$');
+										closeAllPrompt();
+										return true;
+									} else {
+										return false;
+									}
+								}
+							});
+						} else {
+							return false;
+						}
+					},
+					cancel: function(){
+						closeAllPrompt();
+						return true;
+					}
+				});
+				
+				initFormValidation();
+				
+				/*
+				 * request data for the form 
+				 */
+				jQueryAjaxCmd({
+					"data": {"actioncode": "414"},
+					success: function(retscript) {
+						eval(retscript);
+					}
+				});
+			}
+		});
+	});
+});
+</script> 

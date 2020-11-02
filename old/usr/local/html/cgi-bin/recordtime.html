@@ -1,0 +1,47 @@
+<form enctype="multipart/form-data" id="wmform">
+	<table width="753" height="120" border="0">
+          <tr>
+            <td width="28%" height="34" align="right">$recordtime.timelimit$</td>
+            <td width="72%">
+            	<select>
+            		<option>2$recordtime.hour$</option>
+            		<option>4$recordtime.hour$</option>
+            		<option>6$recordtime.hour$</option>
+            		<option>8$recordtime.hour$</option>
+            	</select>
+            </td>
+          </tr>
+          <tr>
+        		<td height="35">&nbsp;</td>
+            <td height="45px">
+            	<input id="saveBtn" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" type="button" value="$btn.save$" />
+            </td>
+          </tr>
+      </table>
+</form>
+<script>
+jQuery(function() {
+	initFormValidation();
+	
+	jQuery('#saveBtn').click(function() {
+		var validate = validateFormByID('wmform');
+		if(validate) {
+			
+			var data = {"actioncode": "140"};
+			var params = getFormItemValue('wmform');
+			if(params) {
+				jQuery.extend(data, params);
+			}
+			jQueryAjaxCmd({
+				"data": data,
+				success: function(ret) {
+					alert(ret);
+					jQuery('#menub').click();
+				}
+			});
+		} else {
+			return false;
+		}
+	});
+});
+</script> 

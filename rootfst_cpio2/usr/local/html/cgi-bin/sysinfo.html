@@ -1,0 +1,231 @@
+﻿<form id="wmform">
+  <table class="tablesorter" style="width: 750px; margin-left: 150px;" >
+	<tr style="text-align: left;">
+	    <td width="565"><h5>$leftmenu.sysrestore$</h5></td>
+	</tr>
+	<tr style="text-align: left;">
+		<td>
+		<p>
+		$sysinfo.type$
+			<select name="devtype" id="devtype" style="width: 120;">
+				<option value="0">R11</option>
+				<option value="1">CL5000T1(SDI)</option>
+				<option value="2">CL5000T2(IPC)</option>
+			</select>
+		</p>
+		<p>
+		$sysinfo.seriesno$
+		<input name="serialNumber" id="serialNumber" type="text"  class="inputtext validate[required]" />
+		</p>
+		<p>
+		$sysinfo.model$
+		<input name="modelNumber" id="modelNumber" type="text"  class="inputtext validate[required]" />
+		</p>
+		<p>
+		$sysinfo.softname$
+			<select name="softlang" id="softlang" style="width: 50;">
+				<option value="1">$sysinfo.cn$</option>
+				<option value="2">$sysinfo.us$</option>
+			</select>
+			<input name="softname11" id="softname11" type="text"  class="inputtext validate[required]" style="width: 300;" />
+			<input name="softname12" id="softname12" type="text"  class="inputtext validate[required]" style="width: 300;" />
+			<input name="softname21" id="softname21" type="text"  class="inputtext validate[required]" style="width: 300;" />
+			<input name="softname22" id="softname22" type="text"  class="inputtext validate[required]" style="width: 300;" />
+		</p>
+		<p>
+		$sysinfo.softtype$
+		<input name="softtype1" id="softtype1" type="text"  class="inputtext validate[required]" />
+		<input name="softtype2" id="softtype2" type="text"  class="inputtext validate[required]" />
+		</p>
+		<p>
+		$sysinfo.microlecture$
+	  	<input name="microlecture" id="microlecture" type="text"  class="inputtext validate[required]" style="width: 340"/>
+		</p>
+		<p>
+		$sysinfo.copyright$
+      
+		<select name="copyright" id="copyright" style="width:50;">
+			<option value="0">$sysinfo.null$</option>
+			<option value="1">$sysinfo.cn$</option>
+			<option value="2">$sysinfo.us$</option>
+		</select>
+	  
+		<input name="copyrightText0" id="copyrightText0" type="text"  class="inputtext" readonly  disabled style="width:300;" />
+		<input name="copyrightText1" id="copyrightText1" type="text"  class="inputtext validate[required]" style="width:300;" />
+		<input name="copyrightText2" id="copyrightText2" type="text"  class="inputtext validate[required]" style="width:300;" />
+		</p>
+		<p>
+		<input id="btnSetSerialNo" type="button" class="$image_prex$click_btn" value="$sysinfo.set$" />
+		<input id="restartBtn" type="button" class="$image_prex$click_btn" value="$sysinfo.reboot$" />
+		</p>
+		</td>
+	</tr>
+  </table>
+</form>
+
+<script>
+
+function SysReboot() {
+	art.dialog({
+		title: '$opt.reboottitle$',
+		okValue: '$opt.rebootok$',
+		cancelValue: '$opt.rebootcancel$',
+		lock: true,
+		fixed: true,
+		background: '#600', // 背景色
+		opacity: 0.87,	// 透明度
+		content: "$opt.rebootcontent$",
+		ok: function() {
+			var data = {"actioncode": "215"};
+			jQueryAjaxCmd({
+				"data": data,
+				success: function(ret) { 
+					if(ret == "1"){
+						//falert('$falert.ok$', '$resetdefault.rebootsuccess$');
+						window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+					} else{
+						falert('$falert.ok$', '$uploadstateerror1$');
+					}
+				}
+			});	
+		},
+		cancel: true
+	});
+}
+
+
+function setSoftInfo() {
+	jQuery("#devtype").change(function() {
+		var val = jQuery(this).val();
+		if(val == 1) {
+			jQuery("#softlang").change(function() {
+				var softlang = jQuery(this).val();
+				if(softlang == 1) {
+					jQuery("#softname11").hide();
+					jQuery("#softname21").show();
+					jQuery("#softname12").hide();
+					jQuery("#softname22").hide();
+				} else {
+					jQuery("#softname11").hide();
+					jQuery("#softname21").hide();
+					jQuery("#softname12").hide();
+					jQuery("#softname22").show();				
+				}
+			}).change();
+
+			jQuery("#softtype1").hide();
+			jQuery("#softtype2").show();
+		} else if (val == 2) {
+			jQuery("#softlang").change(function() {
+				var softlang = jQuery(this).val();
+				if(softlang == 1) {
+					jQuery("#softname11").hide();
+					jQuery("#softname21").show();
+					jQuery("#softname12").hide();
+					jQuery("#softname22").hide();
+				} else {
+					jQuery("#softname11").hide();
+					jQuery("#softname21").hide();
+					jQuery("#softname12").hide();
+					jQuery("#softname22").show();				
+				}
+			}).change();
+
+			jQuery("#softtype1").hide();
+			jQuery("#softtype2").show();
+		} else {
+			jQuery("#softlang").change(function() {
+				var softlang = jQuery(this).val();
+				if(softlang == 1) {
+					jQuery("#softname11").show();
+					jQuery("#softname21").hide();
+					jQuery("#softname12").hide();
+					jQuery("#softname22").hide();
+				} else {
+					jQuery("#softname11").hide();
+					jQuery("#softname21").hide();
+					jQuery("#softname12").show();
+					jQuery("#softname22").hide();				
+				}
+			}).change();
+
+			jQuery("#softtype1").show();
+			jQuery("#softtype2").hide();
+		}
+	}).change();
+}
+
+function setCopyright() {
+	jQuery("#copyright").change(function() {
+		var val = jQuery(this).val();
+		if(val == 1) {
+			jQuery("#copyrightText0").hide();
+			jQuery("#copyrightText1").show();
+			jQuery("#copyrightText2").hide();
+		} else if (val == 2) {
+			jQuery("#copyrightText0").hide();
+			jQuery("#copyrightText1").hide();
+			jQuery("#copyrightText2").show();
+		} else {
+			jQuery("#copyrightText0").show();
+			jQuery("#copyrightText1").hide();
+			jQuery("#copyrightText2").hide();
+		}
+	}).change();
+}
+
+jQuery(function() {
+	initFormValidation();
+	
+	jQuery("input[type=file]").filestyle({ 
+	     image: "../fileStyle/css/choose-file.png",
+	     imageheight : 22,
+	     imagewidth : 52,
+	     width : 150
+	});
+
+	jQuery("#btnSetSerialNo").click(function(){
+		var serialNumber = jQuery("#serialNumber").val();
+		var modelNumber = jQuery("#modelNumber").val();
+		var validate = validateFormByID('wmform');
+		if(validate) {
+			var data = {
+				"actioncode": "423", 
+				"serialNumber": serialNumber, 
+				"modelNumber": modelNumber,
+				"copyright": jQuery("#copyright").val(),
+				"copyrightText0": jQuery("#copyrightText0").val(),
+				"copyrightText1": jQuery("#copyrightText1").val(),
+				"copyrightText2": jQuery("#copyrightText2").val()
+			};
+			jQueryAjaxCmd({
+				"data": data,
+				success: function(ret) {
+					jQuery('#nav_sysinfo').click();
+					SysReboot();
+				}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('#restartBtn').click(function() {
+		alert('$resetdefault.reboot$');
+		var data = {"actioncode": "215"};
+		jQueryAjaxCmd({
+			"data": data,
+			success: function(ret) { 
+				if(ret == "1"){
+					falert('$falert.ok$', '$resetdefault.reboot$');
+					window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+				} else{
+					falert('$falert.ok$', '$uploadstateerror1$');
+				}
+			}
+		});	
+	});
+});
+
+
+</script>

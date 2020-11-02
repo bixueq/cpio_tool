@@ -1,0 +1,92 @@
+﻿<form enctype="multipart/form-data" id="wmform" action="encoder.cgi" method="post" target="upload">
+  <table width="750" height="150" border="0">
+	<tr>
+	  <td width="148" height="54" class="$image_prex$itemnametd">&nbsp;</td>
+	  <td width="565"><h5>$sysupgrade.title$</h5></td>
+	</tr>
+	<tr>
+	  <td class="$image_prex$itemnametd">&nbsp;</td>
+	  <td>$sysupgrade.file$
+		<input type="file" name="file"/>
+		<input type="hidden" name="actioncode" value="110">
+		<input id="submitBtn" type="button" style="margin-left:70px;margin-top:-10px;" class="$image_prex$click_btn" value="$sysupgrade.upgrade$" />
+	  </td>
+	</tr>
+  </table>
+</form>
+<iframe name="upload" style="display:none"></iframe>
+<script>
+function SysReboot() {
+	art.dialog({
+		title: '$opt.reboottitle$',
+		okValue: '$opt.rebootok$',
+		cancelValue: '$opt.rebootcancel$',
+		lock: true,
+		fixed: true,
+		background: '#600', // 背景色
+		opacity: 0.87,	// 透明度
+		content: "$opt.rebootcontent$",
+		ok: function() {
+			var data = {"actioncode": "215"};
+			jQueryAjaxCmd({
+				"data": data,
+				success: function(ret) { 
+					if(ret == "1"){
+						//falert('$falert.ok$', '$resetdefault.rebootsuccess$');
+						window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+					} else{
+						falert('$falert.ok$', '$uploadstateerror1$');
+					}
+				}
+			});	
+		},
+		cancel: true
+	});
+}
+
+var intervalId;
+function getUpgradeStatus() {
+	var data = {"actioncode": "112"};
+	jQueryAjaxCmd({
+		"data": data,
+		success: function(ret) {
+			if(ret == "1"){
+				SysReboot();
+				closeUploading();
+				window.clearInterval(intervalId);		
+			}
+			else if(ret == "2"){
+				alert('$uploadFileFail$');
+				closeUploading();
+				window.clearInterval(intervalId);
+			} 
+			else if (ret == "3") {
+				alert('$uploadFileError$');
+				closeUploading();
+				window.clearInterval(intervalId);
+			}
+		}
+	});
+}
+
+jQuery(function() {
+	jQuery("input[type=file]").filestyle({ 
+	     image: "../fileStyle/css/choose-file.png",
+	     imageheight : 22,
+	     imagewidth : 52,
+	     width : 180
+	 });
+	
+	jQuery('#submitBtn').click(function() {
+		jQuery('#wmform').submit();
+		openUploading();
+		intervalId = setInterval("getUpgradeStatus()", 2000);
+	});
+	
+	
+
+	
+	initFormValidation();
+	
+});
+</script> 

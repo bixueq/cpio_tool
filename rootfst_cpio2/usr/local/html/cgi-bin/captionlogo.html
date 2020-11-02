@@ -1,0 +1,231 @@
+<form enctype="multipart/form-data" id="wmform" action="encoder.cgi" method="post" target="upload">
+      <div class="ui-tabs" id="tabs">
+			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-widget-width-full ui-corner-all" role="tablist" style="width: 99.2%;">
+				<li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" tabIndex="1" id="tabs-1">$audio.input1$</li>
+				<li class="ui-state-default ui-corner-top" tabIndex="2" id="tabs-2">$audio.input2$</li>
+				<li class="ui-state-default ui-corner-top" tabIndex="3" id="tabs-3">$audio.input3$</li>
+			</ul>
+			
+			<div id="tabs-content" class="ui-widget-content ui-widget-width-full ui-corner-bottom" style="clear: both;">
+				<div class="ui-tabs-inner-content">
+				<table style="width:758px;" border="0" id="titleTable">
+					<tr>
+		              <td width="184" height="28">&nbsp;</td>
+		              <td width="559"><h5>$titlelogo.title$</h5></td>
+		            </tr>
+		            <tr>
+		              <td height="28" align="right" class="$image_prex$itemnametd">$titlelogo.position$</td>
+		              <td>
+		              	<select id="cap_position" name="cap_position" style="width:150px;">
+							<option value="1">Top Left</option>
+							<option value="2">Top Right</option>
+							<option value="3">Bottom Left</option>
+							<option value="4">Bottom Right</option>
+		              	</select>
+		              	</td>
+		            </tr>
+		            <tr>
+		              <td align="right" valign="top">$titlelogo.content$</td>
+		              <td><label>
+		              <textarea rows="3" cols="30" name="cap_text" id="cap_text"></textarea><br/>
+		                <font style="color:#FF0000;font-size:12px;">$titlelogo.lettersatmost$</font>
+		              </label></td>
+		            </tr>
+					<tr>
+						<td></td>
+						<td><label><input type="checkbox" id="cap_displaytime" name="cap_displaytime" />&nbsp;$titlelogo.displaytime$</label></td>
+					</tr>
+		            <tr>
+					  <td></td>
+		              <td height="45px" align="center" style="padding-top: 20px; padding-left: 20px; text-align: left;">
+				        <input id="saveBtn" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" type="button" value="$btn.save$" />
+				      </td>
+		            </tr>
+		            <tr>
+		              <td height="16" colspan="2"><div style="width:375px; height:1px; margin-left:75px; background-color:#186FCA;"></div></td>
+		            </tr>
+				</talbe>
+				<table style="width:758px;" border="0">
+		            <tr>
+		              <td height="37">&nbsp;</td>
+		              <td><h5>$titlelogo.logo$</h5></td>
+		            </tr>
+		            <tr>
+		              <td align="right" class="$image_prex$itemnametd">$titlelogo.position$</td>
+		              <td>
+		              	<select id="logo_position" name="logo_position" style="width:150px;">
+							<option value="0">None</option>
+							<option value="1">Top Left</option>
+							<option value="2">Top Right</option>
+							<option value="3">Bottom Left</option>
+							<option value="4">Bottom Right</option>
+		              	</select>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td height="28" class="$image_prex$itemnametd">$titlelogo.logopic$</td>
+		              <td>
+		              	<input type="file" name="file" />
+						<input type="hidden" name="actioncode" value="419">
+						<input type="hidden" name="input" value="1">
+						
+		              </td>
+		            </tr>
+		            <tr>
+		              <td height="25">&nbsp;</td>
+		              <td><font style="color:#FF0000; font-size:12px;">$titlelogo.logoprompt$</font></td>
+		            </tr>
+					<tr>
+					  <td></td>
+		              <td height="45px" align="center" style="padding-top: 20px; padding-left: 20px; text-align: left;">
+				        <input id="uploadImgBtn" type="button" class="btn-normal" value="$network.ok$" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$titlelogo.upload$" />	
+				      </td>
+		            </tr>
+		          </table>
+				</div>
+			</div>
+      	</div>
+        </form>
+		<iframe name="upload" style="display:none"></iframe>
+<script>
+var inputTab = 1;
+
+function initInputTab(tab){
+	inputTab = tab;
+	if(tab == 1){
+		// switch this tab on
+		jQuery("#tabs-1").addClass("ui-tabs-active");
+		jQuery("#tabs-1").addClass("ui-state-active");
+		jQuery("#tabs-2").removeClass("ui-tabs-active");
+		jQuery("#tabs-2").removeClass("ui-state-active");
+		jQuery("#tabs-3").removeClass("ui-tabs-active");
+		jQuery("#tabs-3").removeClass("ui-state-active");
+		jQuery("#titleTable").show();
+	}else if(tab == 2){
+		jQuery("#tabs-2").addClass("ui-tabs-active");
+		jQuery("#tabs-2").addClass("ui-state-active");
+		jQuery("#tabs-1").removeClass("ui-tabs-active");
+		jQuery("#tabs-1").removeClass("ui-state-active");
+		jQuery("#tabs-3").removeClass("ui-tabs-active");
+		jQuery("#tabs-3").removeClass("ui-state-active");
+		jQuery("#titleTable").show();
+	}else{
+		jQuery("#tabs-3").addClass("ui-tabs-active");
+		jQuery("#tabs-3").addClass("ui-state-active");
+		jQuery("#tabs-1").removeClass("ui-tabs-active");
+		jQuery("#tabs-1").removeClass("ui-state-active");
+		jQuery("#tabs-2").removeClass("ui-tabs-active");
+		jQuery("#tabs-2").removeClass("ui-state-active");
+		jQuery("#titleTable").hide();
+	}
+}
+
+function formatTime(date) {
+	var year = date.getFullYear();
+	var month = date.getMonth() + 1;
+	var day = date.getDate();
+	var hours = date.getHours();
+	var minutes = date.getMinutes();
+	var seconds = date.getSeconds();
+	return year + "/" + month + "/" + day + "/" + hours + "/" + minutes + "/" + seconds;
+}
+
+function initPositionSelect() {
+	if(jQuery('#cap_position').val() != '0') {
+		jQuery('#cap_x').prop('disabled', true);
+		jQuery('#cap_y').prop('disabled', true);
+	} else {
+		jQuery('#cap_x').prop('disabled', false);
+		jQuery('#cap_y').prop('disabled', false);
+	}
+	jQuery('#cap_position').change(function() {
+		if(jQuery(this).val() != '0') {
+			jQuery('#cap_x').prop('disabled', true);
+			jQuery('#cap_y').prop('disabled', true);
+		} else {
+			jQuery('#cap_x').prop('disabled', false);
+			jQuery('#cap_y').prop('disabled', false);
+		}
+	});
+	
+	if(jQuery('#logo_position').val() != '0') {
+		jQuery('#logo_x').prop('disabled', true);
+		jQuery('#logo_y').prop('disabled', true);
+	} else {
+		jQuery('#logo_x').prop('disabled', false);
+		jQuery('#logo_y').prop('disabled', false);
+	}
+	jQuery('#logo_position').change(function() {
+		if(jQuery(this).val() != '0') {
+			jQuery('#logo_x').prop('disabled', true);
+			jQuery('#logo_y').prop('disabled', true);
+		} else {
+			jQuery('#logo_x').prop('disabled', false);
+			jQuery('#logo_y').prop('disabled', false);
+		}
+	});
+}
+
+jQuery(function() {
+	initFormValidation();
+	jQuery("input[type=file]").filestyle({ 
+	     image: "../fileStyle/css/choose-file.png",
+	     imageheight : 22,
+	     imagewidth : 52,
+	     width : 150
+	 });
+	 
+	jQuery("#tabs li").click(function () {
+		inputTab = parseInt(jQuery(this).attr("tabIndex"));
+		if (!jQuery(this).hasClass('ui-tabs-active')) {
+			// switch all tabs off
+			jQuery(".ui-tabs-active").removeClass("ui-tabs-active");
+			jQuery(".ui-state-active").removeClass("ui-state-active");
+			// switch this tab on
+			jQuery(this).addClass("ui-tabs-active");
+			jQuery(this).addClass("ui-state-active");
+		}
+		jQueryAjaxHtml({
+			data: {"actioncode": 308, "input": inputTab},
+			effectsOn: true
+		});
+	});
+
+	jQuery('#refreshBtn').click(function() {
+		jQuery('#menue').click();
+	});
+
+	jQuery('#saveBtn').click(function() {
+		var validate = validateFormByID('wmform');
+		if (validate) {
+			var cap_displaytime = jQuery('#cap_displaytime');
+			var displaytime = 0;
+			if(cap_displaytime.prop('checked')) {
+				displaytime = 1;
+			} else {
+				displaytime = 0;
+			}
+			var content = jQuery("#cap_text").val();
+			var cap_position = jQuery("#cap_position").val();
+			var data = {"actioncode": "411", "input": inputTab, "cap_text": content, "cap_displaytime": displaytime, "cap_position": cap_position };
+			jQueryPostAjaxCmd({
+				"data": data,
+				success: function(ret) {
+					alert(ret);
+					if(ret == 1) {
+						alert('$opt.success$');
+					}
+				}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('#uploadImgBtn').click(function() {
+		formSet.setHiddenValue('#wmform ', 'actioncode', '419');
+		formSet.setHiddenValue('#wmform ', 'input', inputTab);
+		jQuery('#wmform').submit();
+	});
+});
+</script> 

@@ -1,0 +1,62 @@
+<form enctype="multipart/form-data" id="wmform">
+<table width="753" height="167" border="0" id="tab1">
+	<tr>
+	  <h5><font color="#FF0000">&nbsp;&nbsp;$network.notice1$</font></h5>
+	  <h5><font color="#FF0000">&nbsp;&nbsp;$network.notice2$</font></h5>
+	  <h5><font color="#FF0000">&nbsp;&nbsp;$network.notice3$</font></h5>
+	</tr>
+
+	<tr>
+	  <td height="44" class="$image_prex$itemnametd">$network.ip$</td>
+	  <td><input id="IPAddress" class="inputtext validate[required, custom[ipv4]]" name="IPAddress" type="text" /></td>
+	</tr>
+	<tr>
+	  <td height="48" class="$image_prex$itemnametd">$network.mask$</td>
+	  <td>
+		<input id="subMask" class="inputtext validate[required, custom[ipv4]]" name="subMask" type="text" />
+	  </td>
+	</tr>
+	 <tr>
+	  <td height="42" class="$image_prex$itemnametd">$network.gateway$</td>
+	  <td>
+		<input id="gateWay" class="inputtext validate[required, custom[ipv4]]" name="gateWay" type="text" />
+	  </td>
+	</tr>
+ 
+	<tr>
+		<td height="42" class="$image_prex$itemnametd"></td>
+		<td>
+			<input id="setBtn" type="button" class="$image_prex$click_btn" value="$btn.tmpset$" />
+		</td>
+	</tr>
+</table>
+</form>
+<script>
+
+jQuery(function() {
+	initFormValidation();
+	jQuery('#setBtn').click(function() {
+		var ip=jQuery("#IPAddress").val();
+		var onehref = "location.href = 'http://" + ip + "/cgi-bin/encoder.cgi'";
+		var validate = validateFormByID('wmform');
+		if (validate) {
+			var data = {"actioncode": "406"};
+			var params = getFormItemValue('wmform');
+			if(params) {
+				jQuery.extend(data, params);
+				jQueryAjaxCmd({
+					"data": data,
+					success: function(ret) {
+						if(ret == 1){
+							window.setTimeout(onehref, 3000);
+						}
+					}
+				});
+				//window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+			}
+		} else {
+			return true;
+		}	
+	});	
+});
+</script> 

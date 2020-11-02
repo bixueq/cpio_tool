@@ -1,0 +1,39 @@
+#! /bin/sh
+
+set -e
+DESC="HisiSys"
+NAME=Hisi
+osmem=1024
+case "$1" in
+  start)
+        printf "Starting $DESC: "
+		osmem=`cat /proc/cmdline | awk -F '=| |M'  '{print $2}'`
+		echo $osmem
+		cd /ko&&./load3531a -i -osmem $osmem
+		himm 0x120F0208 0x2; # 0: GPIO18_4   1:VOU_SLV_DAT7     2:UART1_RXD
+		himm 0x120F020C 0x2; # 0: GPIO18_5   1:VOU_SLV_DAT6     2:UART1_TXD
+		himm 0x120F0210 0x2; # 0: GPIO18_6   1:VOU_SLV_DAT12    2:UART2_RXD    3:UART0_RTSN
+		himm 0x120F0214 0x2; # 0: GPIO18_7   1:VOU_SLV_DAT13    2:UART2_TXD    3:UART0_CTSN
+		himm 0x120F0218 0x1; # 0: GPIO23_6   1:UART3_RXD  
+		himm 0x120F021C 0x1; # 0: GPIO23_7   1:UART3_TXD
+		hwclock -s
+		/ko/extdrv/serialserver&
+	
+		
+        echo "OK"
+        ;;
+  stop)
+        printf "Stopping $DESC: "
+        echo "OK"
+        ;;
+  restart|force-reload)
+        echo "Restarting $DESC: "
+        echo ""
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|restart|force-reload}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0

@@ -1,0 +1,21 @@
+export PATH='/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/reach/bin:/usr/local/reach/qt/bin'
+
+if [ "$PS1" ]; then
+		export PS1="\u@:\w\$ "
+fi
+
+
+
+
+export PAGER='/bin/more '
+export EDITOR='/bin/vi'
+export LD_LIBRARY_PATH='/lib:/usr/lib:/usr/lib/r11:/usr/local/lib'
+
+
+# Source configuration files from /etc/profile.d
+for i in /etc/profile.d/*.sh ; do
+	if [ -r "$i" ]; then
+		. $i
+	fi
+	unset i
+done

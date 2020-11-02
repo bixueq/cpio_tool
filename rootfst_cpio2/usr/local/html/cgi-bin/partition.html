@@ -1,0 +1,125 @@
+﻿<form id="wmform">
+	<table width="750" height="150" border="0">
+		<tr>
+		  <td width="148" height="54" class="$image_prex$itemnametd">&nbsp;</td>
+		  <td width="565"><h5>$leftmenu.partition$<font color="#FF0000">&nbsp;&nbsp;$partition.notice$</font></h5></td>
+		</tr>
+		<tr>
+			<td  height="50" class="$image_prex$itemnametd" >$partition.info$</td>
+			<td width="360"><input readOnly name="disk" type="text" class="show_label" />
+		</tr>
+       <tr>
+			<td width="20%" height="50"></td>
+			<td style="text-align:left;">
+			     <input id="setbtn" type="button" class="$image_prex$click_btn" value="$partition.btn$" />
+				 <input id="restartBtn" type="button" class="$image_prex$click_btn" value="$sysinfo.reboot$" />
+          </td>
+       </tr>
+   </table>
+</form>
+
+<iframe name="upload" style="display:none"></iframe>
+<script>
+function SysReboot(titleValue) {
+	art.dialog({
+		title: titleValue,
+		okValue: '$opt.rebootok$',
+		cancelValue: '$opt.rebootcancel$',
+		lock: true,
+		fixed: true,
+		background: '#600', // 背景色
+		opacity: 0.87,	// 透明度
+		content: titleValue,
+		ok: function() {
+			var data = {"actioncode": "215"};
+			jQueryAjaxCmd({
+				"data": data,
+				success: function(ret) { 
+					if(ret == "1"){
+						//falert('$falert.ok$', '$resetdefault.rebootsuccess$');
+						window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+					} else{
+						falert('$falert.ok$', '$uploadstateerror1$');
+					}
+				}
+			});	
+		},
+		cancel: true
+	});
+}
+
+var intervalId;
+function closeingOK() {
+	var data = {"actioncode": "900"};
+	jQueryAjaxCmd({
+		"data": data,
+		success:function(ret) {
+			SysReboot('$partition.btn$$partition.disk$$partition.success$!');		
+			window.clearInterval(intervalId);
+		}
+	});
+} 	
+
+function getFormatStatus(){
+	var data = {"actioncode": "113"};
+	jQueryAjaxCmd({
+		"data": data,
+		success: function(ret) {
+			if(ret == "1"){
+				alert('$partition.btn$$partition.disk$$partition.success$!');
+				parent.closeUploading();
+				window.clearInterval(intervalId);
+				intervalId = setInterval("closeingOK()", 1000);
+			}else if(ret == "2"){
+				SysReboot('$partition.btn$$partition.disk$$partition.fail$');
+				parent.closeUploading();
+				window.clearInterval(intervalId);
+			} 
+			
+		}
+	});
+}
+
+function init(){
+	
+	/*
+	 * 初始化表单验证
+	 */
+	initFormValidation();
+	/*
+	 * 初始化设置和刷新按钮事件
+	 */
+	jQuery('#setbtn').click(function() {
+			var data = {
+				"actioncode": "448"
+				};
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					if(ret == 1) {
+						openUploading();
+						intervalId = setInterval("getFormatStatus()", 2000);
+					}else{
+						alert('$input.failure$');
+					}
+				}
+			});
+
+	});
+	jQuery('#restartBtn').click(function() {
+		alert('$resetdefault.reboot$');
+		var data = {"actioncode": "215"};
+		jQueryAjaxCmd({
+			"data": data,
+			success: function(ret) { 
+				if(ret == "1"){
+					falert('$falert.ok$', '$resetdefault.reboot$');
+					window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+				} else{
+					falert('$falert.ok$', '$uploadstateerror1$');
+				}
+			}
+		});	
+	});	
+}	
+</script>

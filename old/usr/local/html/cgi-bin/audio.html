@@ -1,0 +1,52 @@
+<form enctype="multipart/form-data" id="wmform">
+	<table width="753" border="0">
+		<tr>
+	      <td width="28%" align="right">$audio.input$</td>
+	      <td width="72%">
+	      <input style="margin-left:10px; margin-right:5px;" type="radio" name="audio" value="1" />$audio.input1$ Mic in
+	      <input style="margin-left:10px; margin-right:5px;" type="radio" name="audio" value="2" />$audio.input2$ Line In
+	      </td>
+	    </tr>
+	    <tr>
+	        <td height="45px" colspan="2" align="center" style="padding-top: 20px;">
+	            <input id="saveBtn" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" type="button" value="$btn.save$" />
+	        </td>
+	    </tr>
+	</table>
+</form>
+<script>
+jQuery(function() {
+	/*
+	 * form validation
+	 */
+	initFormValidation();
+	
+	/*
+	 * init button event handler
+	 */
+	jQuery('#refreshBtn').click(function() {
+		jQuery('#menuc').click();
+	});
+	
+	jQuery('#saveBtn').click(function() {
+		var validate = validateFormByID('wmform');
+		if (validate) {
+			var data = {"actioncode": "410"};
+			var params = getFormItemValue('wmform');
+			if(params) {
+				jQuery.extend(data, params);
+			}
+			jQueryAjaxCmd({
+				"data": data,
+				success: function(ret) {
+					if(ret == 1) {
+						alert('$opt.success$');
+					}
+				}
+			});
+		} else {
+			return false;
+		}
+	});
+});
+</script> 
